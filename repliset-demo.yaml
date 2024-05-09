@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: ReplicaSet
+metadata:
+ name: replicaset-demo
+ namespace: apps
+ labels:
+    
+  tier: frontend
+spec:
+  # modify replicas according to your case
+ replicas: 2
+ selector:
+  matchLabels:
+   tier: frontend
+ template:
+  metadata:
+   namespace: apps
+   labels:
+    tier: frontend
+  spec:
+   containers:
+    - name: nginx
+      image: nginx:1.14.2
+      ports:
+       - containerPort: 80
+
