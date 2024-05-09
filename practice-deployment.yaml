@@ -1,0 +1,66 @@
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: amazon
+  namespace: bag
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+ name: eks-deployment1
+ namespace: 
+ labels:
+  tier: frontend
+spec:
+ replicas: 1
+ selector:
+  matchLabels:
+   tier: frontend
+ template:
+  metadata:
+   namespace: bag
+   labels:
+    tier: frontend
+  spec:
+   containers:
+   
+   - name: adservice-container
+     image: vyshnavi2501/adservice-1:v1
+     ports:
+      - containerPort: 8080
+
+   - name: cart-container
+     image: vyshnavi2501/cartservice-1:v1
+
+   - name: checkout-container
+     image: vyshnavi2501/checkoutservice-1:v1
+
+   - name: currency-container
+     image: vyshnavi2501/currencyservice-1:v1
+
+   - name: email-container
+     image: vyshnavi2501/emailservice-1:v1
+
+   - name: frontend-container
+     image: vyshnavi2501/frontend-1:v1
+     
+   - name: loadgenerator-container
+     image: vyshnavi2501/loadgenerator-1:v1
+
+   - name: payment-container
+     image: vyshnavi2501/paymentservice-1:v1
+     
+   - name: productcatalog-container
+     image: vyshnavi2501/productcatalogservice:v1
+
+   - name: recommendation-container
+     image: vyshnavi2501/recommendationservice-1:v1
+
+   - name: shipping-container
+     image: vyshnavi2501/shippingservice-1:v1
+
+   - name: shoppingassistance-container
+     image: vyshnavi2501/shoppingassistantservice-1:v1                   #ports:
+        #- containerPort: 80
+

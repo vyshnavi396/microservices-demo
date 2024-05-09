@@ -1,0 +1,31 @@
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: webapp
+  namespace: test
+  
+---  
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+ name: nginx-deployment
+ namespace: test
+ labels:
+  tier: frontend
+spec:
+ replicas: 3
+ selector:
+  matchLabels:
+   tier: frontend
+ template:
+  metadata:
+   namespace: test
+   labels:
+    tier: frontend
+  spec:
+   containers:
+    - name: nginx-container
+      image: amol1996/docker-k8s-demo:v1.1.1
+      ports:
+        - containerPort: 8080
